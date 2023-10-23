@@ -3,6 +3,7 @@
 # Project specific files and dirs
 1m
 
+*.kate-swp
 *.PRI
 *.pri
 *.bin

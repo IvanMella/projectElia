@@ -10,6 +10,8 @@
 #include <string.h>
 #include "strtoepoch.h"
 
+/*			TEST						*/
+
 typedef struct FinRow
 {
 	time_t date;
