@@ -24,10 +24,10 @@ int main(int argc, char *argv[])
 {
 	int i = 1;
 
-	/*	SE NON RICEVO FILE DI INPUT LANCIO UN ERRORE E CHIUDO	*/
 	if (argc < 2)
 	{
-		printf("Inserire il file di input\n");
+		fprintf(stderr, "Missing required argument.\n"
+			"Usage: %s bin_file \n\n", argv[0]);
 		exit(1);
 	}
 
@@ -152,6 +152,10 @@ double ema_calc_elia(double current, double prev, double smoothing)
 	double second = prev * (1 - smoothing);
 	return first + second;
 }
+
+
+
+
 
 
 

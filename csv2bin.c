@@ -28,8 +28,8 @@ int main(int argc, char *argv[])
 	if (argc < 2)
 	{
 		/* stampa il messaggio d' errore */
-		fprintf(stderr, "Usage: %s input file [output file]\n",\
-			argv[0]);
+		fprintf(stderr, "Missing required argument.\n"
+			"Usage: %s csv_file [bin_file]\n\n", argv[0]);
 		exit(1);
 	}
 
@@ -82,7 +82,7 @@ int main(int argc, char *argv[])
 	token[i] = strtok(content, "\n,");
 	while(token[i] != NULL)
 	{
-		printf("%d: %s\n", i, token[i]);
+		/* printf("%d: %s\n", i, token[i]);			*/
 		i++;
 		token[i] = strtok(NULL, "\n,");
 	}
@@ -122,26 +122,27 @@ int main(int argc, char *argv[])
 
 	FILE *write_ptr;
 
+	printf("Writing.. ");
+
 	if(argc == 3)
 	{
-		printf("argomento!\n");
+		printf("%s\n", argv[2]);
 		write_ptr = fopen(argv[2],"wb");
 	}
 	else
 	{
-		printf("senza argomento!\n");
-		write_ptr = fopen("output.pri","wb");
+		printf("output.bin\n");
+		write_ptr = fopen("output.bin","wb");
 	}
 
-	// write 10 bytes from our buffer
+	/* Dump the whole array to the file in one shot 		*/
 	fwrite(startbuf,sizeof(binaryblock),ntokens / 6 - 1, write_ptr);
 
 	fclose(write_ptr);
 
+	/* Free memory							*/
 	free(content);
 	free(token);
 	free(startbuf);
 
 }
-
-/* /run/media/elia/Elements/Programmazione/strategia_trading/database/1m/BTCUSDT.csv*/

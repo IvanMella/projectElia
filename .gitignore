@@ -1,4 +1,8 @@
-# Project specific files
+
+
+# Project specific files and dirs
+1m
+
 *.PRI
 *.pri
 *.bin
