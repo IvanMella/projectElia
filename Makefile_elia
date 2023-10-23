@@ -1,0 +1,22 @@
+# -*- Makefile -*-
+
+csv2bin: csv2bin.o strtoepoch.o
+	gcc csv2bin.o strtoepoch.o -o csv2bin
+
+elia: csv2bin_elia.o strtoepoch.o
+	gcc csv2bin_elia.o strtoepoch.o -o csv2bin_elia
+
+strtoepoch.o: strtoepoch.c strtoepoch.h
+	gcc -c strtoepoch.c
+
+csv2bin.o: csv2bin.c
+	gcc -c csv2bin.c
+
+csv2bin_elia.o: csv2bin.c
+	gcc -c csv2bin_elia.c
+
+clean:
+	rm -f *.o csv2bin
+
+cleane:
+	rm -f *.o csv2bin_elia

@@ -1,0 +1,76 @@
+# include <stdio.h>
+# include <stdlib.h>
+#include <sys/stat.h>
+#include "strtoepoch.h"
+
+typedef struct FinRow
+{
+	time_t date;
+	double open;
+	double high;
+	double low;
+	double close;
+	double volume;
+} binaryblock;
+
+int main(int argc, char *argv[])
+{
+	int i = 0;
+
+	printf("Argomenti: %d\n", argc);
+
+	while(i < argc)
+	{
+		printf("%d: %s\n", i, argv[i]);
+		i++;
+	}
+
+	/*	SE NON RICEVO FILE DI INPUT LANCIO UN ERRORE E CHIUDO	*/
+	if (argc < 2)
+	{
+		printf("Inserire il file di input\n");
+		exit(1);
+	}
+
+	struct stat fileinfo;
+	stat(argv[1], &fileinfo);
+	printf("File size: %ld bytes\n", fileinfo.st_size);
+
+	/* TODO:
+	 * Aggiungere sezione per controllo formato file */
+
+	int numblocks = fileinfo.st_size /sizeof(binaryblock);
+	/* alloca la memoria per ospitare tutto il file 		*/
+	binaryblock *content = malloc(fileinfo.st_size);
+
+	FILE *f = fopen(argv[1], "rb");
+	if (f == NULL)
+	{
+		char errmsg[100];
+		sprintf(errmsg, "Can't open %s for reading", argv[1]);
+		perror(errmsg);
+		exit(1);
+	}
+
+	/* legge il file csv, lo copia in memoria (content) e lo chiude	*/
+	fread(content, sizeof(binaryblock), numblocks, f);
+	fclose(f);
+
+	i = 0;
+	binaryblock *contentbegin = content;
+	char date_str[40];
+	while (i < numblocks)
+	{
+		epochtostr(content->date, date_str);
+		printf("%s,%lf,%lf,%lf,%lf,%lf\n", 	date_str,
+							content->open,
+							content->high,
+							content->low,
+							content->close,
+							content->volume);
+		i++;
+		content++;
+	}
+
+	return 0;
+}
