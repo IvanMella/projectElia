@@ -3,7 +3,7 @@
 # include <sys/stat.h>
 # include "strtoepoch.h"
 # include <string.h>
-
+/*test*/
 typedef struct FinRow
 {
 	time_t date;
