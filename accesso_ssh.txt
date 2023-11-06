@@ -1,0 +1,29 @@
+dal terminale:
+
+    ssh-keygen -t ed25519 -C "your_email@example.com"
+crea la chiave. confermare nome e destinazione (~/.ssh/id_ed25519). Non mettere la passphrase.
+
+far partire l'agente ssh
+
+    eval "$(ssh-agent -s)"
+
+aggiungere la chiave all agente.
+    ssh-add ~/.ssh/id_ed25519
+
+
+aggiungere il contenuto ~/.ssh/id_ed25519 a github (settings -- ssh and gpg keys)
+
+verifica l'accesso
+    git remote -v
+    > origin  https://github.com/OWNER/REPOSITORY.git (fetch)
+    > origin  https://github.com/OWNER/REPOSITORY.git (push)
+cosi e https
+
+cambia l'accesso da https a ssh
+    git remote set-url origin git@github.com:OWNER/REPOSITORY.git
+
+    $ git remote -v
+# Verify new remote URL
+    > origin  git@github.com:OWNER/REPOSITORY.git (fetch)
+    > origin  git@github.com:OWNER/REPOSITORY.git (push)
+cosi e ssh
