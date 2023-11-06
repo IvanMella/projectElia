@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 	{
 		/* stampa il messaggio d' errore */
 		fprintf(stderr, "Missing required argument.\n"
-			"Usage: %s csv_file [bin_file]\n\n", argv[0]);
+			"Usage: %s csv_file [bin_file] [-e nnn] [...]\n\n", argv[0]);
 		exit(1);
 	}
 
@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 
 	/* alloca la memoria per ospitare tutto il file 		*/
 	char *content = malloc(fileinfo.st_size);
-	
+
 	FILE *f = fopen(argv[1], "r");
 	if (!f)
 	{
@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 	/* legge il file csv, lo copia in memoria (content) e lo chiude	*/
 	fread(content, sizeof(char), fileinfo.st_size, f);
 	fclose(f);
-	
+
 	/* conta i campi nel file per sapere la memoria da allocare, 	*
 	 * sottrae i primi 6 campi header che non servono		*/
 	int ntokens = 0;
