@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
 	if (argc < 2)
 	{
 		fprintf(stderr, "Missing required argument.\n"
-			"Usage: %s bin_file \n\n", argv[0]);
+			"Usage: %s dbf_file \n\n", argv[0]);
 		exit(1);
 	}
 
