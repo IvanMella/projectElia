@@ -1,4 +1,4 @@
-#include <stdio.h>
+# include <stdio.h>
 # include <stdlib.h>
 
 typedef struct DatabaseRecords
@@ -34,8 +34,9 @@ typedef struct FieldDescriptorArray
 
 int main(int argc, char *argv[])
 {
+	printf("inizio\n");
 	fda *mainfda;
-
+	printf("prima check\n");
 	if (argc < 2)
 	{
 		fprintf(stderr, "Missing required argument.\n"
@@ -43,12 +44,14 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 
+	printf("prima fopen\n");
 	FILE *f = fopen(argv[1], "rb");
 
-
+	printf("dopo fopen\n");
 	fread(mainfda, sizeof(fda), 1, f);
+	printf("dopo fread\n");
 	fclose(f);
-
+	printf("dopo fclose\n");
 	//printf();
 
 	return 0;
